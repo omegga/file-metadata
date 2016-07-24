@@ -1,0 +1,9 @@
+doctype html
+html
+	head
+	body
+		form(method="post", enctype="multipart/form-data", action=formAction)
+			input(type="file", name="uploadedFile")
+			input(type="submit", value="Click to upload")
+		if fileSize
+			p= fileSize
