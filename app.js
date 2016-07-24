@@ -12,19 +12,22 @@ app.set("view engine", "jade");
 var upload = multer();
 
 app.get("/", function(req, res) {
-	var formAction = req.protocol+"://"+req.get("host");
+	var formAction = req.protocol+"://"+req.get("host")+"/upload";
 	res.render("index", {
 		formAction: formAction
 	});
 });
 
-app.post('/', upload.single('uploadedFile'),  function(req, res) {
-	var formAction = req.protocol + "://" + req.get("host");
+app.post('/upload', upload.single('uploadedFile'),  function(req, res) {
 	var fileSize = "Size of the file is : " + req.file.size + " bytes";
-	res.render("index", {
-		formAction: formAction,
-		fileSize: fileSize
-	});
+	var jsonResponse = {
+		"file name": req.file.originalname,
+		"file size": req.file.size
+	};
+	
+	res.setHeader("Content-Type", "application/json");
+	res.send(jsonResponse);
+	
 });
 
 app.listen(port, function(req, res) {
