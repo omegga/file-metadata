@@ -1,8 +1,8 @@
 var express = require('express'),
 	multer  = require('multer'),
-	jade = require('jade'),
-	path = require('path'),
-	port = process.env.PORT || 8080;
+	jade    = require('jade'),
+	path    = require('path'),
+	port    = process.env.PORT || 8080;
 
 var app = express();
 
@@ -19,10 +19,9 @@ app.get("/", function(req, res) {
 });
 
 app.post('/upload', upload.single('uploadedFile'),  function(req, res) {
-	var fileSize = "Size of the file is : " + req.file.size + " bytes";
 	var jsonResponse = {
 		"file name": req.file.originalname,
-		"file size": req.file.size
+		"file size in bytes": req.file.size
 	};
 	
 	res.setHeader("Content-Type", "application/json");
