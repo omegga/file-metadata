@@ -25,7 +25,7 @@ app.post('/upload', upload.single('uploadedFile'),  function(req, res) {
 	};
 	
 	res.setHeader("Content-Type", "application/json");
-	res.send(jsonResponse);
+	res.send(JSON.stringify(jsonResponse));
 	
 });
 
